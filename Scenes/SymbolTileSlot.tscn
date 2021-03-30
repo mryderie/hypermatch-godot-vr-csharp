@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Materials/TileSlotMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Scenes/Scripts/SymbolTileSlot.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/Sounds/plink.wav" type="AudioStream" id=3]
+
+[sub_resource type="BoxShape" id=1]
+
+[sub_resource type="CubeMesh" id=2]
+material = ExtResource( 1 )
+size = Vector3( 0.2, 0.2, 0.06 )
+
+[node name="SymbolTileSlot" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="CollisionArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="CollisionArea"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.03, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="SlotOccupySound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )

@@ -1,0 +1,44 @@
+﻿<Project Sdk="Godot.NET.Sdk/3.2.3">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
+    <ProjectGuid>{467A2FEE-EE38-436B-BC58-DF049CB1E2BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>HyperMatch</RootNamespace>
+    <AssemblyName>HyperMatch</AssemblyName>
+    <GodotProjectGeneratorVersion>1.0.7374.16792</GodotProjectGeneratorVersion>
+    <TargetFramework>net472</TargetFramework>
+    <!--The following properties were overriden during migration to prevent errors.
+    Enabling them may require other manual changes to the project and its files.-->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\Scripts\Color.cs" />
+    <Compile Include="Scenes\Scripts\ColorTile.cs" />
+    <Compile Include="Scenes\Scripts\ColorTileMaterials.cs" />
+    <Compile Include="Scenes\Scripts\ColorTileSlot.cs" />
+    <Compile Include="Scenes\Scripts\ColorTileTray.cs" />
+    <Compile Include="Scenes\Scripts\Controller.cs" />
+    <Compile Include="Scenes\Scripts\GameOverMenu.cs" />
+    <Compile Include="Scenes\Scripts\MatchTile.cs" />
+    <Compile Include="Scenes\Scripts\MatchTileStream.cs" />
+    <Compile Include="Scenes\Scripts\ScoreBoard.cs" />
+    <Compile Include="Scenes\Scripts\Menu.cs" />
+    <Compile Include="Scenes\Scripts\Symbol.cs" />
+    <Compile Include="Scenes\Scripts\SymbolTile.cs" />
+    <Compile Include="Scenes\Scripts\SymbolTileMaterials.cs" />
+    <Compile Include="Scenes\Scripts\SymbolTileSlot.cs" />
+    <Compile Include="Scenes\Scripts\SymbolTileTray.cs" />
+    <Compile Include="Scenes\Scripts\Tile.cs" />
+    <Compile Include="Scenes\Scripts\TileMatchCountdown.cs" />
+    <Compile Include="Scenes\Scripts\TileSlot.cs" />
+    <Compile Include="Scenes\Scripts\TileTray.cs" />
+    <Compile Include="Scenes\Scripts\TraySlot.cs" />
+    <Compile Include="Scripts\Game.cs" />
+  </ItemGroup>
+</Project>

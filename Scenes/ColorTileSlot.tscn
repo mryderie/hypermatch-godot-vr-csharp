@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Materials/TileSlotMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Scenes/Scripts/ColorTileSlot.cs" type="Script" id=2]
+[ext_resource path="res://Scenes/Sounds/plink.wav" type="AudioStream" id=3]
+
+[sub_resource type="CylinderShape" id=1]
+
+[sub_resource type="CylinderMesh" id=2]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.06
+radial_segments = 32
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="CollisionArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="CollisionArea"]
+transform = Transform( 0.1, 0, 0, 0, -1.31134e-09, -0.1, 0, 0.03, -4.37114e-09, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 1 )
+
+[node name="SlotOccupySound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 3 )

@@ -1,0 +1,104 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scripts/Game.cs" type="Script" id=1]
+[ext_resource path="res://Scenes/Controller.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/MatchTileStream.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/SymbolTileSlot.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/TileMatchCountdown.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/ColorTileSlot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/SymbolTileTray.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/ColorTileTray.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/ScoreBoard.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/StartMenu.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/GameOverMenu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Sounds/chime.wav" type="AudioStream" id=12]
+[ext_resource path="res://Scenes/Sounds/match_miss.wav" type="AudioStream" id=13]
+[ext_resource path="res://Scenes/Sounds/match.wav" type="AudioStream" id=14]
+
+[sub_resource type="Environment" id=1]
+
+[sub_resource type="PlaneMesh" id=2]
+
+[sub_resource type="PlaneShape" id=3]
+
+[node name="Game" type="Node"]
+script = ExtResource( 1 )
+
+[node name="World" type="Spatial" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource( 1 )
+
+[node name="DirectionalLightA" type="DirectionalLight" parent="World"]
+transform = Transform( 0.422206, 0.507464, 0.751148, -0.86068, 0.484516, 0.156442, -0.284554, -0.712549, 0.641329, 1.89507, 1.78696, 1.80709 )
+shadow_enabled = true
+
+[node name="DirectionalLightB" type="DirectionalLight" parent="World"]
+transform = Transform( -0.177769, 0.634518, -0.752187, -0.983568, -0.0901081, 0.156441, 0.0314867, 0.767638, 0.64011, -1.895, 1.787, 1.807 )
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody" parent="World"]
+
+[node name="MeshInstance" type="MeshInstance" parent="World/Ground"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="World/Ground"]
+shape = SubResource( 3 )
+
+[node name="ARVROrigin" type="ARVROrigin" parent="."]
+
+[node name="PlayerCamera" type="ARVRCamera" parent="ARVROrigin"]
+current = true
+
+[node name="LeftController" parent="ARVROrigin" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 0, 0 )
+
+[node name="RightController" parent="ARVROrigin" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0 )
+controller_id = 2
+
+[node name="MatchTileStream" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -0.5 )
+
+[node name="ColorTray" parent="MatchTileStream" instance=ExtResource( 8 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.6, 0, 0.2 )
+
+[node name="SymbolTray" parent="MatchTileStream" instance=ExtResource( 7 )]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 0.6, 0, 0.2 )
+
+[node name="ColorTileSlot" parent="MatchTileStream" instance=ExtResource( 6 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -0.25, 0, 0 )
+
+[node name="SymbolTileSlot" parent="MatchTileStream" instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0.25, 0, 0 )
+
+[node name="Tween" type="Tween" parent="MatchTileStream"]
+
+[node name="MatchSuccessSound" type="AudioStreamPlayer3D" parent="MatchTileStream"]
+stream = ExtResource( 14 )
+
+[node name="MatchFailSound" type="AudioStreamPlayer3D" parent="MatchTileStream"]
+stream = ExtResource( 13 )
+
+[node name="NextLevelSound" type="AudioStreamPlayer3D" parent="MatchTileStream"]
+stream = ExtResource( 12 )
+
+[node name="TileMatchTimer" type="Timer" parent="."]
+
+[node name="TileMatchCountdown" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, -0.5 )
+
+[node name="ScoreBoard" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -0.5 )
+
+[node name="StartMenu" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.4 )
+ViewportPath = NodePath("../StartMenu/Viewport")
+
+[node name="GameOverMenu" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, -0.4 )
+visible = false
+ViewportPath = NodePath("../GameOverMenu/Viewport")
+[connection signal="tween_all_completed" from="MatchTileStream/Tween" to="MatchTileStream" method="OnStreamMovementCompleted"]
+[connection signal="timeout" from="TileMatchTimer" to="." method="OnTileMatchTimerTimeout"]
